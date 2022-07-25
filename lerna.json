@@ -1,6 +1,9 @@
 {
   "packages": [
-    "packages/*"
+    "utils/*",
+    "core/*",
+    "commands/*",
+    "models/*"
   ],
   "useNx": false,
   "version": "0.0.0"
