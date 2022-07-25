@@ -14,7 +14,7 @@ const init = require('@ohh-cli/init');
 const exec = require('@ohh-cli/exec');
 const { getNpmSemverVersions } = require('@ohh-cli/get-npm-info');
 const constant = require('./const.js');
-
+console.log(1);
 // let args;
 const program = new Command;
 async function core() {
