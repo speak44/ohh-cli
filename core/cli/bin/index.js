@@ -1,5 +1,5 @@
 #! /usr/bin/env node 
-console.log(1);
+
 const improtLocal = require('import-local');
 const npmLog = require('npmlog');
 
