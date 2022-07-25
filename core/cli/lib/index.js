@@ -62,7 +62,6 @@ function registerCommand() {
 
     if (program.args && program.args.length < 1) {
         program.outputHelp();
-        console.log()
     }
 }
 // 脚手架启动阶段
@@ -103,7 +102,7 @@ function checkEnv() {
     // 获取到本地的.env文件
     // console.log(userHome);
     const dotenvPath = path.resolve(userHome, '.env');
-    console.log(dotenvPath);
+    // console.log(dotenvPath);
     if (pathExists(dotenvPath)) {
         dotenv.config({
             path: dotenvPath
@@ -157,10 +156,9 @@ function checkNodeVesion() {
     const currentNodeVersion = process.version;
     // 设置最小版本号
     const lowestNodeVersion = constant.LOWEST_NODE_VERSION;
-
     // 进行对比，小于最小版本号，报错
     if (semver.lt(currentNodeVersion, lowestNodeVersion)) {
-        throw new Error(colors.red(`oh-cli 需要安装 v${lowestNodeVersion} 以上版本的Node.js`))
+        throw new Error(colors.red(`ohh-cli 需要安装 v${lowestNodeVersion} 以上版本的Node.js`))
     }
 }
 // 检查当前脚手架版本号
