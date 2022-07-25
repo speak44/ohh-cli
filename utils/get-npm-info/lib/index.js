@@ -2,11 +2,12 @@
 const axios = require('axios');
 const urlJoin = require('url-join');
 const semver = require('semver');
- ;
 function getNpmInfo(npmName, registry) {
     if (!npmName) return;
+    
     const registryUrl = registry || defaultRegistry();
     const npmInfoUrl = urlJoin(registryUrl, npmName);
+    // console.log(npmInfoUrl);
     return axios.get(npmInfoUrl).then(response => {
         if (response.status === 200) {
             return response.data;
