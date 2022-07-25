@@ -1,5 +1,5 @@
 'use strict';
- ;
+console.log(1);
 const path = require('path');
 const colors = require('colors');
 const fse = require('fs-extra');
