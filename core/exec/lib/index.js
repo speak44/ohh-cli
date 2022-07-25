@@ -1,5 +1,5 @@
 'use strict';
-console.log(1);
+
 const path = require('path')
 const Package = require('@ohh-cli/package');
 const log = require('@ohh-cli/log');

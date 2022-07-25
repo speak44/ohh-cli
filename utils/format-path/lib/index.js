@@ -1,6 +1,6 @@
 'use strict';
 const path = require('path');
-console.log(1);
+
 function formatPath(p) {
     if (p && typeof(p) === "string") {
         const sep = path.sep;
