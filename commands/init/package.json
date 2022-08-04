@@ -13,6 +13,10 @@
   "files": [
     "lib"
   ],
+  "dependencies": {
+    "@ohh-cli/command": "file:../../models/command",
+    "@ohh-cli/log": "file:../../utils/log"
+  },
   "publishConfig": {
     "access": "public"
   },
