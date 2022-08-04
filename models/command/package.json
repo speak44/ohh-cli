@@ -1,6 +1,6 @@
 {
   "name": "@oh-cli/command",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "oh-cli command",
   "author": "speak44 <1246806407@qq.com>",
   "homepage": "https://github.com/speak44/ohh-cli/tree/main/utils/command#readme",
@@ -27,8 +27,8 @@
     "url": "https://github.com/speak44/ohh-cli/issues"
   },
   "dependencies": {
+    "@ohh-cli/log": "file:../../utils/log",
     "colors": "^1.4.0",
-    "semver": "^7.3.7",
-    "@ohh-cli/log": "file:../../utils/log"
+    "semver": "^7.3.7"
   }
 }
