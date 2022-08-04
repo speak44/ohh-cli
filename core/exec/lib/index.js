@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path')
+const { spawn } =require('child_process');
 const Package = require('@ohh-cli/package');
 const log = require('@ohh-cli/log');
 const SETTINGS = {
@@ -48,7 +49,43 @@ async function exec() {
     }
     const rootFile = pkg.getRootFilePath();
     if (rootFile)  {
-        require(rootFile)(...arguments)
+        try {
+            // 在当前的进程中调用
+            // require(rootFile)(Array.from(arguments))
+            // 在node子进程中调用
+            const args =Array.from(arguments);
+            const cmd = args[args.length-1];
+            const o = Object.create(null);
+            Object.keys(cmd).forEach( key =>{
+                // 存在于对象本身，过滤原型链上属性&& 过滤“_”开头属性&&不是parent下属性
+                if(cmd.hasOwnProperty(key) && key !== 'parent'){
+                    o[key] = cmd[key]
+                }
+            })
+            args[args.length - 1] = o;
+            const code = `require('${rootFile}')(${JSON.stringify(args)})`;
+            const child = platformSpawn('node', ['-e',code], {
+                cwd: process.cwd(),
+                stdio: 'inherit'
+            });
+            child.on('error',e=>{
+                log.error(e.message);
+                process.exit(1); // 错误 code:1
+            })
+            child.on('exit', e=>{
+                log.verbose('命令执行成功：'+ e);
+                process.exit(e)  // 成功 code：0
+            })
+        } catch (error) {
+            log.error(error)
+        }
+
     }
+}
+function platformSpawn(command, args, options) {
+    const win32 = process.platform === 'win32';
+    const cmd = win32 ? 'cmd' : command;
+    const cmdArgs = win32? ['/c'].concat(command, args) : args;
+    return spawn(cmd, cmdArgs, options || {});
 }
 module.exports = exec;

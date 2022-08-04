@@ -10,7 +10,6 @@ const { Command } = require('commander');
 const pathExists = require('path-exists').sync;
 const pkg = require('../package.json');
 const log = require('@ohh-cli/log');
-const init = require('@ohh-cli/init');
 const exec = require('@ohh-cli/exec');
 const { getNpmSemverVersions } = require('@ohh-cli/get-npm-info');
 const constant = require('./const.js');
@@ -68,8 +67,6 @@ function registerCommand() {
 async function prepare() {
     // cli 脚手架版本号
     checkPkgVersion();
-    // 当前node版本号
-    checkNodeVesion();
     // 检查当前启动用户是否为root
     checkRoot();
     // 检查用户主目录
@@ -150,17 +147,7 @@ function checkRoot() {
     rootCheck()
     // console.log(process.getuid());
 }
-// 检查当前node版本
-function checkNodeVesion() {
-    // 获取到当前的版本号
-    const currentNodeVersion = process.version;
-    // 设置最小版本号
-    const lowestNodeVersion = constant.LOWEST_NODE_VERSION;
-    // 进行对比，小于最小版本号，报错
-    if (semver.lt(currentNodeVersion, lowestNodeVersion)) {
-        throw new Error(colors.red(`ohh-cli 需要安装 v${lowestNodeVersion} 以上版本的Node.js`))
-    }
-}
+
 // 检查当前脚手架版本号
 function checkPkgVersion() {
     log.info('cli', pkg.version)

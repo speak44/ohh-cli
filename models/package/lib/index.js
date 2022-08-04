@@ -104,7 +104,7 @@ class Package {
         }
         // 缓存
         if (this.storeDir) {
-           return _getRootFile(catchFilePath)
+           return _getRootFile(this.catchFilePath)
         } else {
            return _getRootFile(this.targetPath)
         }

@@ -1,0 +1,34 @@
+{
+  "name": "@oh-cli/command",
+  "version": "0.0.2",
+  "description": "oh-cli command",
+  "author": "speak44 <1246806407@qq.com>",
+  "homepage": "https://github.com/speak44/ohh-cli/tree/main/utils/command#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/speak44/ohh-cli.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/speak44/ohh-cli/issues"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "semver": "^7.3.7",
+    "@ohh-cli/log": "file:../../utils/log"
+  }
+}
