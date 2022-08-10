@@ -1,6 +1,6 @@
 {
   "name": "@ohh-cli/package",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "ohh-cli npm modules",
   "author": "speak44 <1246806407@qq.com>",
   "homepage": "https://github.com/speak44/ohh-cli#readme",
@@ -17,9 +17,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@ohh-cli/format-path": "^0.0.3",
-    "@ohh-cli/get-npm-info": "^0.0.3",
-    "@ohh-cli/utils": "^0.0.3",
+    "@ohh-cli/format-path": "^0.0.4",
+    "@ohh-cli/get-npm-info": "^0.0.4",
+    "@ohh-cli/utils": "^0.0.4",
     "colors": "^1.4.0",
     "fs-extra": "^10.1.0",
     "npminstall": "^6.5.0",
