@@ -27,8 +27,9 @@
     "url": "https://github.com/speak44/ohh-cli/issues"
   },
   "dependencies": {
-    "@ohh-cli/log": "file:../../utils/log",
+    "@ohh-cli/log": "^0.0.3",
     "colors": "^1.4.0",
     "semver": "^7.3.7"
-  }
+  },
+  "gitHead": "d587af2442ca3c25e40c9e9f6e653e166a9a5d1e"
 }

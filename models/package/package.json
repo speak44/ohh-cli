@@ -17,9 +17,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@ohh-cli/format-path": "file:../../utils/format-path",
-    "@ohh-cli/get-npm-info": "file:../../utils/get-npm-info",
-    "@ohh-cli/utils": "file:../../utils/utils",
+    "@ohh-cli/format-path": "^0.0.3",
+    "@ohh-cli/get-npm-info": "^0.0.3",
+    "@ohh-cli/utils": "^0.0.3",
     "colors": "^1.4.0",
     "fs-extra": "^10.1.0",
     "npminstall": "^6.5.0",
@@ -35,5 +35,6 @@
   },
   "bugs": {
     "url": "https://github.com/speak44/ohh-cli/issues"
-  }
+  },
+  "gitHead": "d587af2442ca3c25e40c9e9f6e653e166a9a5d1e"
 }

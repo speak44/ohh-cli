@@ -1,9 +1,9 @@
 {
-  "name": "@ohh-cli/init",
+  "name": "@ohh-cli/request",
   "version": "0.0.3",
-  "description": "ohh-cli init",
+  "description": "ohh cli request",
   "author": "speak44 <1246806407@qq.com>",
-  "homepage": "https://github.com/speak44/ohh-cli#readme",
+  "homepage": "https://github.com/speak44/ohh-cli/tree/main/utils/request#readme",
   "license": "ISC",
   "main": "lib/index.js",
   "directories": {
@@ -13,14 +13,6 @@
   "files": [
     "lib"
   ],
-  "dependencies": {
-    "@ohh-cli/command": "file:../../models/command",
-    "@ohh-cli/log": "file:../../utils/log",
-    "@ohh-cli/request": "file:../../utils/request",
-    "fs-extra": "^10.1.0",
-    "inquirer": "^8.2.4",
-    "semver": "^7.3.7"
-  },
   "publishConfig": {
     "access": "public"
   },
@@ -33,5 +25,8 @@
   },
   "bugs": {
     "url": "https://github.com/speak44/ohh-cli/issues"
+  },
+  "dependencies": {
+    "axios": "^0.27.2"
   }
 }
