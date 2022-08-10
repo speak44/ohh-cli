@@ -15,8 +15,8 @@
   ],
   "dependencies": {
     "@ohh-cli/command": "file:../../models/command",
-    "@ohh-cli/log": "file:../../utils/log",
-    "@ohh-cli/request": "file:../../utils/request",
+    "@ohh-cli/log": "^0.0.4",
+    "@ohh-cli/request": "^0.0.4",
     "fs-extra": "^10.1.0",
     "inquirer": "^8.2.4",
     "semver": "^7.3.7"
@@ -33,5 +33,6 @@
   },
   "bugs": {
     "url": "https://github.com/speak44/ohh-cli/issues"
-  }
+  },
+  "gitHead": "108648df506d92d85edde9cef305d911dc8a5a88"
 }
