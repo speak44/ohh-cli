@@ -103,7 +103,6 @@ class InitCommand extends Command {
         }catch(e){
             throw Error(e);
         }
-        
         const { installCommand, startCommand } = this.templateInfo;
         // 依赖安装
         await this.execCommand(installCommand, '依赖安装过程中失败!');
@@ -133,6 +132,7 @@ class InitCommand extends Command {
             storeDir,
             targetPath
         })
+        log.verbose('templateNpm',templateNpm)
         if(! await templateNpm.exists()){
             const spinner = spinnerStart('正在下载模板...');
             await sleep();
@@ -297,17 +297,16 @@ class InitCommand extends Command {
                 choices: this.createTemplateChoice(),
             }
         ])
-
-        return projectInfo = {
-            type,
-            ...project
-        }
+            projectInfo = {
+                type,
+                ...project
+            }
         }else if (type === TYPE_COMPONENT) {
 
         };
         //驼峰“userName转化成“user-name”形式
         if (projectInfo.projectName) {
-            projectInfo.className = kebabCase(projectInfo.projectName);
+            projectInfo.className = kebabCase(projectInfo.projectName).replace(/^-/, '');
         }
         return projectInfo;
     }
