@@ -1,7 +1,7 @@
 {
-  "name": "@oh-cli/command",
+  "name": "@ohh-cli/command",
   "version": "0.1.0",
-  "description": "oh-cli command",
+  "description": "ohh-cli command",
   "author": "speak44 <1246806407@qq.com>",
   "homepage": "https://github.com/speak44/ohh-cli/tree/main/utils/command#readme",
   "license": "ISC",
@@ -31,5 +31,5 @@
     "colors": "^1.4.0",
     "semver": "^7.3.7"
   },
-  "gitHead": "108648df506d92d85edde9cef305d911dc8a5a88"
+  "gitHead": "29370eec45d78e9fe40424b11cf4ff6f58bffebb"
 }

@@ -19,7 +19,7 @@
   "dependencies": {
     "@ohh-cli/log": "^0.1.0",
     "@ohh-cli/package": "^0.1.0",
-    "@ohh-cli/utils": "file:../../utils/utils"
+    "@ohh-cli/utils": "^0.1.0"
   },
   "repository": {
     "type": "git",
@@ -31,5 +31,5 @@
   "bugs": {
     "url": "https://github.com/speak44/ohh-cli/issues"
   },
-  "gitHead": "108648df506d92d85edde9cef305d911dc8a5a88"
+  "gitHead": "29370eec45d78e9fe40424b11cf4ff6f58bffebb"
 }
