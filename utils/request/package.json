@@ -1,6 +1,6 @@
 {
   "name": "@ohh-cli/request",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "ohh cli request",
   "author": "speak44 <1246806407@qq.com>",
   "homepage": "https://github.com/speak44/ohh-cli/tree/main/utils/request#readme",
