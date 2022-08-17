@@ -49,6 +49,7 @@ class Package {
             await this.prepare()
             return pathExists(this.catchFilePath)
         } else {
+           
             return pathExists(this.targetPath)
         }
     }

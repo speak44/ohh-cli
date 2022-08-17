@@ -1,9 +1,10 @@
 'use strict';
 
 const path = require('path')
-const { spawn } =require('child_process');
+
 const Package = require('@ohh-cli/package');
 const log = require('@ohh-cli/log');
+const { platformSpawn } =require('@ohh-cli/utils');
 const SETTINGS = {
     init: "@ohh-cli/init"
 }
@@ -82,10 +83,5 @@ async function exec() {
 
     }
 }
-function platformSpawn(command, args, options) {
-    const win32 = process.platform === 'win32';
-    const cmd = win32 ? 'cmd' : command;
-    const cmdArgs = win32? ['/c'].concat(command, args) : args;
-    return spawn(cmd, cmdArgs, options || {});
-}
+
 module.exports = exec;

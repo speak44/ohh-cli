@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "@ohh-cli/log": "^0.0.4",
-    "@ohh-cli/package": "^0.0.4"
+    "@ohh-cli/package": "^0.0.4",
+    "@ohh-cli/utils": "file:../../utils/utils"
   },
   "repository": {
     "type": "git",

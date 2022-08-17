@@ -16,10 +16,14 @@
   "dependencies": {
     "@ohh-cli/command": "file:../../models/command",
     "@ohh-cli/log": "^0.0.4",
+    "@ohh-cli/package": "file:../../models/package",
     "@ohh-cli/request": "^0.0.4",
+    "@ohh-cli/utils": "file:../../utils/utils",
     "fs-extra": "^10.1.0",
     "inquirer": "^8.2.4",
-    "semver": "^7.3.7"
+    "kebab-case": "^1.0.1",
+    "semver": "^7.3.7",
+    "user-home": "^2.0.0"
   },
   "publishConfig": {
     "access": "public"

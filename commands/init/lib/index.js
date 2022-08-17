@@ -1,15 +1,22 @@
 'use strict';
 const fs = require('fs');
+const path = require('path');
 const fse = require('fs-extra');
 const inquirer = require('inquirer');
 const semver = require('semver');
+const kebabCase = require('kebab-case');
+const userHome = require('user-home'); // 拿用户主目录
+const Package = require('@ohh-cli/package');
 const Command = require('@ohh-cli/command');
 const log = require('@ohh-cli/log');
+const { spinnerStart, sleep, execAsync } = require('@ohh-cli/utils');
 const getProjectTemplate = require('./getProjectTemplate');
 
 const TYPE_PROJECT = 'project';
 const TYPE_COMPONENT = 'component';
-
+const TEMPLATE_TYPE_NORMAL = 'normal';
+const TEMPLATE_TYPE_CUSTOM = 'custom';
+const WHILE_COMMAND = ['npm', 'cnpm'];
 class InitCommand extends Command {
     init() {
         this.projectName = this._argv[0] || '';
@@ -25,24 +32,136 @@ class InitCommand extends Command {
                 log.verbose('projectInfo', projectInfo)
                 this.projectInfo = projectInfo;
             // 2. 下载模板
-                this.downloadTemplate()
-            // 3. 安装模板     
+                await this.downloadTemplate()
+            // 3. 安装模板    
+                await this.installTemplate()
             }
         } catch (error) {
             log.error(error);
         }
 
-}
-    downloadTemplate() {
-        const { projectTemplate } = this.projectInfo;
-        const templateInfo = this.template.find(item => item.npmName === projectTemplate);
-        console.log(templateInfo);
+    }
+    async installTemplate() {
+        if(this.templateInfo) {
+            if(!this.templateInfo.type) {
+                this.templateInfo.type = TEMPLATE_TYPE_NORMAL
+            }
+            if(this.templateInfo.type === TEMPLATE_TYPE_NORMAL) {
+                // 标准安装
+                await this.installNormalTemplate()
+            } else if(this.templateInfo.type === TEMPLATE_TYPE_CUSTOM) {
+                // 自定义安装
+                await this.installCustomTemplate()
+            } else {
+                throw Error('无法识别项目模板类型！')
+            }  
+        } else {
+            throw Error('项目模板信息不存在！')
+        }
+    }
+    // 白名单判断
+    checktCommand(cmd) {
+        if (WHILE_COMMAND.includes(cmd)) {
+            return cmd
+        } else{
+            throw Error('命令不存在！命令：'+ cmd );
+        }
+    }
+    // npm install 和 npm run serve 命令封装
+    async execCommand(command, errMsg){
+        let ret;
+        if ( command ) {
+            const cmdArray = command.split(" ")
+            const cmd = this.checktCommand( cmdArray[0] );
+            const args = cmdArray.slice(1);
+            ret = await execAsync(cmd, args, {
+                cwd: process.cwd(),
+                stdio: 'inherit' 
+            })            
+        }
+        if(ret !== 0){
+            throw Error( errMsg );
+        }
+        return ret        
+    }
+
+    async installNormalTemplate() {
+        // console.log('安装标准模板');
+        let spinner = spinnerStart('正在安装模板....');
+        await sleep()
+        try{
+        // 拷贝模板代码到当前目录
+        const templatePath = path.resolve(this.templateNpm.catchFilePath, 'template');
+        const targetPath = process.cwd()
+        // 确保目录是存在的
+        fse.ensureDirSync(templatePath);
+        fse.ensureDirSync(targetPath);
+        // 拷贝
+        fse.copySync(templatePath, targetPath);
+        spinner.stop(true);
+        log.success('模板安装成功');
+        }catch(e){
+            throw Error(e);
+        }
+        
+        const { installCommand, startCommand } = this.templateInfo;
+        // 依赖安装
+        await this.execCommand(installCommand, '依赖安装过程中失败!');
+        // 启动命令行
+        await this.execCommand(startCommand, '项目启动过程中失败!');
+    }
+    async installCustomTemplate() {
+        console.log('安装自定义模板');
+    }
+    async downloadTemplate() {
+        //下载前准备工作------------
         // 1. 通过项目模板API获取项目信息
         // 1.1 通过egg.js 搭建一套后台系统
         // 1.2 通过npm存储项目模板
         // 1.3 将项目模板信息存储到mongodb数据库中
         // 1.4 通过egg.js 获取mongodb中的数据并且通过API返回
+        // ---------------------------------------------
 
+        const { projectTemplate } = this.projectInfo;
+        this.templateInfo = this.template.find(item => item.npmName === projectTemplate);
+        const {npmName, version} = this.templateInfo;
+        const storeDir = path.resolve(userHome, '.ohh-cli', 'template');
+        const targetPath = path.resolve(userHome, '.ohh-cli', 'template', 'node_modules');
+        const templateNpm = new Package({
+            packageName: npmName,
+            packageVersion: version,
+            storeDir,
+            targetPath
+        })
+        if(! await templateNpm.exists()){
+            const spinner = spinnerStart('正在下载模板...');
+            await sleep();
+            try {
+                await templateNpm.install();
+            } catch (error) {
+                throw error
+            } finally {
+                spinner.stop(true);
+                if(await templateNpm.exists()) {
+                    log.success('模板下载成功');
+                    this.templateNpm = templateNpm
+                }
+            }
+        }else{
+            const spinner = spinnerStart('正在更新模板...');
+            await sleep();
+            try {
+                await templateNpm.update();
+            } catch(error) {
+                throw error;
+            } finally {
+                spinner.stop(true);
+                if(await templateNpm.exists()) {
+                    log.success('模板更新成功');
+                    this.templateNpm = templateNpm
+                }
+            };
+        };
     }
     async perpare() {
         // 1. 模板是否存在
@@ -186,7 +305,10 @@ class InitCommand extends Command {
         }else if (type === TYPE_COMPONENT) {
 
         };
-
+        //驼峰“userName转化成“user-name”形式
+        if (projectInfo.projectName) {
+            projectInfo.className = kebabCase(projectInfo.projectName);
+        }
         return projectInfo;
     }
     createTemplateChoice() {
