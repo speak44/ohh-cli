@@ -8,9 +8,28 @@ ohh-cli脚手架开发框架，是企业效率前端团队打造的**前端工�
 - 支持通过插件进行扩展、灵活组合
 - 支持通过预设配置封装最佳实践，开箱即用
 
+### 目录结构描述
+
+├── commands                  // 命令
+│   ├── init                  // 项目创建模块
+├── core
+│   ├── cli                  // cli初始化，执行准备
+│   ├── exec                  // 注册命令
+├── models
+│   ├── command
+│   ├── package
+├── utils
+│   ├── format-path
+│   ├── get-npm-info
+│   ├── log
+│   ├── request
+│   ├── utils
+└── package.json
+
 
 ### 模版、组建的配置数据结构
-- 数据结构需要配合后端设置，自行测试可以启动本地mongodb
+> 数据结构需要配合后端设置，自行测试可以启动本地mongodb
+```
 const json =[
   {
   "name": "vue2标准模板",
@@ -27,3 +46,4 @@ const json =[
   ]
   }
 ]
+```
