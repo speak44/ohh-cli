@@ -19,7 +19,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "8d8187264dcb238f63bc1692ca3078483794874c",
+  "gitHead": "e3473fad4e53cc05f5bd5f1ac057a00f2f990f35",
   "dependencies": {
     "child_process": "^1.0.2",
     "cli-spinner": "^0.2.10"
