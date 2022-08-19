@@ -156,14 +156,12 @@ class InitCommand extends Command {
           if (fs.existsSync(rootFile)) {
             log.notice('开始执行自定义模板');
             const templatePath = path.resolve(this.templateNpm.cacheFilePath, 'template');
-            console.log('templatePath= ',templatePath);
             const options = {
               templateInfo: this.templateInfo,
               projectInfo: this.projectInfo,
               sourcePath: templatePath,
               targetPath: process.cwd(),
-            };
-            console.log('options:',options);
+            }
             const code = `require('${rootFile}')(${JSON.stringify(options)})`;
             log.verbose('code', code);
             await execAsync('node', ['-e', code], { stdio: 'inherit', cwd: process.cwd() });
