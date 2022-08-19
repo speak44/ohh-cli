@@ -36,7 +36,7 @@ class Package {
             this.packageVersion = await getNpmLatestVersion(this.packageName)
         }
     }
-    get catchFilePath(){
+    get cacheFilePath(){
         return path.resolve(this.storeDir, `_${this.cacheFilePathPrefix}@${this.packageVersion}@${this.packageName}`);
     }
     getSpecificCacheFilePath(packageVersion){
@@ -47,7 +47,7 @@ class Package {
         // 缓存模式
         if (this.storeDir) {
             await this.prepare()
-            return pathExists(this.catchFilePath)
+            return pathExists(this.cacheFilePath)
         } else {
            
             return pathExists(this.targetPath)
@@ -84,8 +84,10 @@ class Package {
                     version: latestPackageVersion
                 }]
             })
+            this.packageVersion  = latestPackageVersion;
+        }else{
+            this.packageVersion  = latestPackageVersion;
         }
-        this.packageVersion  = latestPackageVersion;
     }
     // 获取入口文件路径
     getRootFilePath() {
@@ -105,7 +107,7 @@ class Package {
         }
         // 缓存
         if (this.storeDir) {
-           return _getRootFile(this.catchFilePath)
+           return _getRootFile(this.cacheFilePath)
         } else {
            return _getRootFile(this.targetPath)
         }

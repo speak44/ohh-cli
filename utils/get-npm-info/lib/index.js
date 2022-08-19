@@ -5,10 +5,8 @@ const urlJoin = require('url-join');
 const semver = require('semver');
 function getNpmInfo(npmName, registry) {
     if (!npmName) return;
-    
     const registryUrl = registry || defaultRegistry();
     const npmInfoUrl = urlJoin(registryUrl, npmName);
-    console.log(npmInfoUrl);
     return axios.get(npmInfoUrl).then(response => {
         if (response.status === 200) {
             return response.data;
@@ -21,7 +19,7 @@ function getNpmInfo(npmName, registry) {
 };
 
 function defaultRegistry(isOriginal = false) {
-    return isOriginal ? 'https://registry.npmjs.org' : 'https://registry.npm.taobao.org';
+    return isOriginal ? 'https://registry.npm.taobao.org': 'https://registry.npmjs.org';
 };
 
 async function getNpmVersions(npmName, registry) {
