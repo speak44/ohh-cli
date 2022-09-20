@@ -1,6 +1,6 @@
 {
   "name": "@ohh-cli/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ohh-cli core",
   "author": "",
   "homepage": "",
@@ -20,10 +20,10 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@ohh-cli/exec": "^1.0.0",
-    "@ohh-cli/get-npm-info": "^1.0.0",
-    "@ohh-cli/init": "^1.0.0",
-    "@ohh-cli/log": "^1.0.0",
+    "@ohh-cli/exec": "^1.0.1",
+    "@ohh-cli/get-npm-info": "^1.0.1",
+    "@ohh-cli/init": "^1.0.1",
+    "@ohh-cli/log": "^1.0.1",
     "colors": "^1.4.0",
     "commander": "^9.4.0",
     "dotenv": "^16.0.1",
